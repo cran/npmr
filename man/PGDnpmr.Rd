@@ -44,7 +44,7 @@ PGDnpmr(B, b, X, Y, lambda, s, group = NULL, accelerated = TRUE, eps = 1e-07,
 }
   \item{accelerated}{
     Logical. Should accelerated proximal gradient descent be used? Default is
-    FALSE.
+    TRUE.
 }
   \item{eps}{
     Convergence threshold. When relative change in the objective function after

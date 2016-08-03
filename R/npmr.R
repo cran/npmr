@@ -1,6 +1,6 @@
 npmr <-
-function(X, Y, lambda = exp(seq(7, -2)), s = 0.1, eps = 1e-6,
-    group = NULL, accelerated = FALSE, B.init = NULL, b.init = NULL,
+function(X, Y, lambda = exp(seq(7, -2)), s = 0.1/max(X), eps = 1e-6,
+    group = NULL, accelerated = TRUE, B.init = NULL, b.init = NULL,
     quiet = TRUE) {
 
     if (is.null(dim(Y))) {
@@ -34,7 +34,7 @@ function(X, Y, lambda = exp(seq(7, -2)), s = 0.1, eps = 1e-6,
     b.path = array(NA, dim = c(ncol(Y), length(lambda)))
     objective.path = rep(NA, length(lambda))
 
-    cat('Progress: ')
+    if (!quiet) cat('Progress: ')
     for (l in 1:length(lambda)) {
         solution = PGDnpmr(B, b, X, Y, lambda[l], s = s, group = group,
             accelerated = accelerated, eps = eps, quiet = quiet)
@@ -44,9 +44,9 @@ function(X, Y, lambda = exp(seq(7, -2)), s = 0.1, eps = 1e-6,
         b.path[, l] = scale(b, scale = FALSE)
         objective.path[l] = min(solution$objectivePath)
         cat(round(100*l/length(lambda)))
-        cat('% ')
+        if (!quiet) cat('% ')
     }
-    cat('\n')
+    if (!quiet) cat('\n')
 
     rownames(B.path) = colnames(X)
     colnames(B.path) = rownames(b.path) = colnames(Y)

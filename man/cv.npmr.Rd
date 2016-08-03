@@ -11,9 +11,9 @@ held-out fold. After the optimal value of the regularization parameter is
 determined, fit NPMR with this tuning parameter to the whole training set.
 }
 \usage{
-cv.npmr(X, Y, lambda = exp(seq(7, -2)), s = 0.1, eps = 1e-06, group = NULL,
-    accelerated = FALSE, B.init = NULL, b.init = NULL, foldid = NULL,
-    nfolds = 10)
+cv.npmr(X, Y, lambda = exp(seq(7, -2)), s = 0.1/max(X), eps = 1e-06,
+    group = NULL, accelerated = TRUE, B.init = NULL, b.init = NULL,
+    foldid = NULL, nfolds = 10)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -52,7 +52,7 @@ cv.npmr(X, Y, lambda = exp(seq(7, -2)), s = 0.1, eps = 1e-06, group = NULL,
 }
   \item{accelerated}{
     Logical. Should accelerated proximal gradient descent be used? Default is
-    FALSE.
+    TRUE.
 }
   \item{B.init}{
     Initial value of the regression coefficient matrix for proximal gradient

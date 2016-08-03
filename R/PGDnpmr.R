@@ -9,6 +9,11 @@ function(B, b, X, Y, lambda, s, group = NULL, accelerated = TRUE,
     eta = matrix(1, nrow(X), 1) %*% t(b) + X %*% B
     P = exp(eta)/rowSums(exp(eta))
 
+    if (accelerated) {
+        C = B
+        c = b
+    }
+
     objectivePath = c(objectiveFast(B, P, W, lambda), rep(NA, maxit))
     it = 0
     diff = eps + 1
@@ -19,21 +24,33 @@ function(B, b, X, Y, lambda, s, group = NULL, accelerated = TRUE,
         B. = prox(B + s*XtY - s*crossprod(X, P), s*lambda, group)
         b. = b + s*sumY - s*colSums(P)
         if (accelerated) {
+            C. = B.
+            c. = b.
             B. = B. + it/(it+3)*(B. - B)
             b. = b. + it/(it+3)*(b. - b)
+            C = C.
+            c = c.
         }
         eta = t(t(as.matrix(X%*%B.)) + b.)
         expeta = exp(eta)
         P. = expeta/rowSums(expeta)
         objectivePath[it+1] = objectiveFast(B., P., W, lambda)
+        if (is.na(objectivePath[it+1])) {
+          stop(paste('Probabilities numerically 0 or 1 after one PGD step.',
+            'Try smaller step size'))
+        }
         while(objectivePath[it+1] > objectivePath[it]){
             if (!quiet) print(paste('s =', s))
             s = s/2
             B. = prox(B + s*XtY - s*crossprod(X, P), s*lambda, group)
             b. = b + s*sumY - s*colSums(P)
             if (accelerated) {
+                C. = B.
+                c. = b.
                 B. = B. + it/(it+3)*(B. - B)
                 b. = b. + it/(it+3)*(b. - b)
+                C = C.
+                c = c.
             }
             eta = t(t(as.matrix(X%*%B.)) + b.)
             expeta = exp(eta)

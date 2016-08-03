@@ -9,8 +9,8 @@ Fit a multinomial logistic regression model for a sequence of regularization
 parameters penalizing the nuclear norm of the regression coefficient matrix.
 }
 \usage{
-npmr(X, Y, lambda = exp(seq(7, -2)), s = 0.1, eps = 1e-06, group = NULL,
-    accelerated = FALSE, B.init = NULL, b.init = NULL, quiet = TRUE)
+npmr(X, Y, lambda = exp(seq(7, -2)), s = 0.1/max(X), eps = 1e-06, group = NULL,
+    accelerated = TRUE, B.init = NULL, b.init = NULL, quiet = TRUE)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -47,7 +47,7 @@ npmr(X, Y, lambda = exp(seq(7, -2)), s = 0.1, eps = 1e-06, group = NULL,
 }
   \item{accelerated}{
     Logical. Should accelerated proximal gradient descent be used? Default is
-    FALSE.
+    TRUE.
 }
   \item{B.init}{
     Initial value of the regression coefficient matrix for proximal gradient

@@ -1,6 +1,6 @@
 cv.npmr <-
-function(X, Y, lambda = exp(seq(7, -2)), s = 0.1, eps = 1e-6,
-    group = NULL, accelerated = FALSE, B.init = NULL, b.init = NULL,
+function(X, Y, lambda = exp(seq(7, -2)), s = 0.1/max(X), eps = 1e-6,
+    group = NULL, accelerated = TRUE, B.init = NULL, b.init = NULL,
     foldid = NULL, nfolds = 10) {
 
     if (is.null(dim(Y))) {
@@ -39,8 +39,9 @@ function(X, Y, lambda = exp(seq(7, -2)), s = 0.1, eps = 1e-6,
     }
         
     fit = list(call = match.call(), error = colSums(error),
-        fit = npmr(X, Y, lambda.min), lambda.min = lambda.min, lambda = lambda,
-        n = nrow(X))
+        fit = npmr(X, Y, lambda.min, s = s, eps = eps, group = group,
+        accelerated = accelerated, B.init = B.init, b.init = b.init),
+        lambda.min = lambda.min, lambda = lambda, n = nrow(X))
     class(fit) = "cv.npmr"
     return(fit)
 }
