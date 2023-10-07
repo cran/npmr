@@ -1,4 +1,4 @@
-4cc82399f924a5191ed3c164c9c2138a *DESCRIPTION
+7e78ce173389911779e3b692f47b0fbf *DESCRIPTION
 f945de5fc82b71cb85803dcd9dc6876d *NAMESPACE
 7c76c99e0c05f4fcadcdbfa453b7792b *R/PGDnpmr.R
 17e11bf9cf458642557c46235da93883 *R/cv.npmr.R
@@ -15,11 +15,11 @@ a8bd4af39ab33c94e6852692c380c1e2 *R/plot.npmr.R
 5acd209f16473f47153dbc69c760d35a *R/print.npmr.R
 135cdc8c84477c942a6a67829a1cead6 *R/prox.R
 5c04c1241ccade8bdea1460f7674e8a8 *data/Vowel.rda
-98483bc45c0ba49a574776e20111553c *man/PGDnpmr.Rd
+437beba72d4b100227a0e291da515158 *man/PGDnpmr.Rd
 880627377c46188ee0620816ea38a8f5 *man/Vowel.Rd
 bbc61f3e70c51cd57104c7b25083e20d *man/cv.npmr.Rd
 4e5226a5583efb7db4a9f2870e726975 *man/logL.Rd
-01651355ffb72cf175df49d98b359dfa *man/npmr-package.Rd
+0f510506a901ba3f9ec5253d41b2762e *man/npmr-package.Rd
 1519c4e453696c3867bf24029ff8dd2e *man/npmr.Rd
 99d34728fe5f63cdd0440fa39c8affa5 *man/nuclear.Rd
 7db2db30d66833449110889c49838d1f *man/objective.Rd
